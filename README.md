@@ -1,3 +1,4 @@
+<a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-splash.gif" width="200" align="left" /></a>
 # 🎮 404 game - js13k
 
 [Mark Knol](https://twitter.com/mknol)'s entry for the [js13k gamejam 2020](https://js13kgames.com/).
@@ -14,7 +15,7 @@ This is the first time I joined the js13k gamejam. The idea is to create a game 
 
 > To illustration how small 13kb is: If you have a iPhone X and you take a selfie, that's 2.93MB, so this game fits 225 times in that. Or, if you have a phone with 64gb of storage, you can have 5.000.000 copies of this game on your phone. 🤯
 
-<img src="js13k-2020-markknol-splash.gif" /><img src="js13k-2020-markknol-gameplay.gif" />
+<a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-gameplay.gif" width="40%" align="right" /></a>
 
 #### Getting started
 
