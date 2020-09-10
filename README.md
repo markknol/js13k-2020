@@ -1,11 +1,12 @@
-<a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-splash.gif" width="200" align="right" /></a>
-# 🎮 404 game - js13k
+<a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-splash.gif" width="200" align="left" /></a>
+# 🎮 _You have found_ <sub>js13k 2020 game - theme 404<sub>
 
 [Mark Knol](https://twitter.com/mknol)'s entry for the [js13k gamejam 2020](https://js13kgames.com/).
 
 It's a soothing game about perspective. It's important to turn your sound on, headphones advised. 
 Tap and hold to move the trail, make a loop to catch things, if you want.
-Should work on desktop and mobile devices. <sub>It's mostly tested on Chrome, because that's the mother of browsers these days right?</sub>
+Should work on desktop and mobile devices.  
+<sub>It's mostly tested on Chrome, because that's the mother of browsers these days right?</sub>
 
 # Post mortem
 
@@ -15,7 +16,7 @@ This is the first time I joined the js13k gamejam. The idea is to create a game 
 
 > To illustration how small 13kb is: If you have a iPhone X and you take a selfie, that's 2.93MB, so this game fits 225 times in that. Or, if you have a phone with 64gb of storage, you can have 5.000.000 copies of this game on your phone. 🤯
 
-<center><a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-gameplay.gif" width="100%" /></a></center>
+<a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-gameplay.gif" width="40%" align="right" /></a>
 
 #### Getting started
 
