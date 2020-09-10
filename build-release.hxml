@@ -1,0 +1,19 @@
+build.hxml
+
+# Minifiy more variable names
+-lib hxobfuscator
+#-D hxobfuscator_disabled
+
+# Minification library, use terser
+-lib uglifyjs
+-D uglifyjs_overwrite
+-D uglifyjs_slavemode
+-D uglifyjs_warning_level=QUIET
+-D uglifyjs_bin=node_modules/.bin/terser
+
+
+# Remove console logs
+--no-traces
+
+# Use custom build tool
+--macro BuildTool.run()

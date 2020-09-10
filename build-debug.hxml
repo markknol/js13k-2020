@@ -1,0 +1,8 @@
+build.hxml
+
+-D debug_collision
+
+# Use custom build tool
+--macro BuildTool.run()
+
+-debug

@@ -1,0 +1,11 @@
+-main Main
+-cp src/
+-js bin/_.js
+
+-dce full
+-D analyzer-optimize
+-D js-es=6
+
+-lib no-spoon
+
+-D loop_unroll_max_cost=5

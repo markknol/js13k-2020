@@ -1,0 +1,3 @@
+# @install: lix --silent download "haxelib:/no-spoon#0.2.0" into no-spoon/0.2.0/haxelib
+-cp ${HAXE_LIBCACHE}/no-spoon/0.2.0/haxelib/src
+-D no-spoon=0.2.0
