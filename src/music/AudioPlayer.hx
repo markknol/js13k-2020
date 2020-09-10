@@ -27,7 +27,7 @@ class AudioPlayer {
 		
 		this.effect = delay;
 	
-		window.setTimeout(onReady, 1);
+		if (audioContext!=null) window.setTimeout(onReady, 1);
 	}
 
 	public function playNotes(isChord:Bool, noteNumbers:Array<Int>, noteDuration = 2.0, offset:Float = 0.0, volumeScale:Float = 0.85):Void {

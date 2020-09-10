@@ -34,7 +34,7 @@ class System {
 
 		// create custom renderer
 		renderer = new Renderer(element);
-		renderer.onFirstTap = e -> audioContext = new AudioContext();
+		renderer.onFirstTap = e -> audioContext = js.Syntax.code("new(window.AudioContext || window.webkitAudioContext)");
 		// create platform
 		platform = new Platform();
 		
