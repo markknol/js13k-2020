@@ -14,6 +14,8 @@ This is the first time I joined the js13k gamejam. The idea is to create a game 
 
 > To illustration how small 13kb is: If you have a iPhone X and you take a selfie, that's 2.93MB, so this game fits 225 times in that. Or, if you have a phone with 64gb of storage, you can have 5.000.000 copies of this game on your phone. 🤯
 
+<img src="js13k-2020-markknol-splash.gif" /><img src="js13k-2020-markknol-gameplay.gif" />
+
 #### Getting started
 
 To prove to myself it is perfectly possible to use Haxe for this, I started to create a small engine in Haxe. I called the project hx13k initially. 
@@ -53,14 +55,13 @@ The build tool calls terser to minify the build and I manually move replaced som
 I added the [no-spoon] library (also macro) to tone down `Std.string`; this is a to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code.
 
 Haxe is pretty great for this actually! I can write normal Haxe code, all fields become small names because of my [Haxe obfuscator]() lib. 
-I noticed that standard Haxe enums take some space in the output because they can also hold enum values. In most cases it was easy to change that too `enum abstracts`, which is basically comes down to a enum in TypeScript (`<ad>`But with more features! E.g. you can add functions and own from/to cast functions. Even operator overloading is supported! And no one notices when looking at the output thanks to `inline`!`</ad>`).
+I noticed that standard Haxe enums take some space in the output because they can also hold enum values. In most cases it was easy to change that too `enum abstracts`, which is basically comes down to a enum in TypeScript (`<ad>But with more features! E.g. you can add functions and own from/to cast functions. Even operator overloading is supported! And no one notices when looking at the output because it is inlined!</ad>`).
 
 In debug builds I can add nice stuff for development (using conditional compilation) and the release build those things are gone and it is very optimized/small.
 
 #### Conclusion
 
 You can use most goodness of Haxe to create a nice and small game. It was fun to join this jam! ⭐⭐⭐⭐⭐
-
 
 # Locally test/compile game 
 
