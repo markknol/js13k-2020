@@ -1,11 +1,12 @@
 <a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-splash.gif" width="200" align="left" /></a>
-# 🎮 404 game - js13k
+# 🎮 _You have found_ <sub>js13k 2020 game - theme 404<sub>
 
 [Mark Knol](https://twitter.com/mknol)'s entry for the [js13k gamejam 2020](https://js13kgames.com/).
 
-It's a soothing game about perspective. It's important to turn your sound on, headphones adviced. 
+It's a soothing game about perspective. It's important to turn your sound on, headphones advised. 
 Tap and hold to move the trail, make a loop to catch things, if you want.
-Should work on desktop and mobile devices. <sub>It's mostly tested on Chrome, because that's the mother of browsers these days right?</sub>
+Should work on desktop and mobile devices. 
+<sub>It's mostly tested on Chrome, because that's the mother of browsers these days right?</sub>
 
 # Post mortem
 
@@ -33,7 +34,7 @@ Then I added my own simple custom canvas [renderer](src/flambe/Renderer.hx). It 
 I noticed that I needed interaction too (for everything you can tap on), so made simple system to allow object to be tapped.
 Now, I don't know how normal people do this in 2d canvas, but I haven't found a native way to do it. So the way I approached it was kinda hacky, but.. it worked out. 
 I created another (hidden) canvas pure for interaction. The mainloop iterates each tick on all entities. 
-When it finds an DisplayComponent in the hierarchie it will call `display.draw(ctx)` (ctx = 2d context of visual canvas) in the odd frames, but calls a `display.drawInteraction(ctx)` (ctx = 2d context of interaction canvas) in the even frames.
+When it finds an DisplayComponent in the hierarchy it will call `display.draw(ctx)` (ctx = 2d context of visual canvas) in the odd frames, but calls a `display.drawInteraction(ctx)` (ctx = 2d context of interaction canvas) in the even frames.
 Maybe it could run in the same frame and render the game at 60fps, but I thought to save the planet a bit.
 
 #### Procedural lines
