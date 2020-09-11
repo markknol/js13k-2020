@@ -57,12 +57,12 @@ Haxe allows generalized metaprogramming, which they call [macros](https://haxe.o
 
 I created [build tool](src/BuildTool.hx) (a macro that runs after compilation is done) that logs sizes and creates the final zip-file. The build tool calls [terser](https://www.npmjs.com/package/terser) to minify the build but I also manually replaced some tokens after that in the same macro.
 
-I added the [no-spoon](https://github.com/back2dos/no-spoon/) library (also macro) to tone down `Std.string`; this is a to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code.
+I added the [no-spoon](https://github.com/back2dos/no-spoon/) library (also macro) to replace `Std.string`; this is Haxe's build-in to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code. I don't need this, so I replaced it with something that just returns itself.
 
 There is another macro that consumes the metadata `@:component` which can be applied on fields, e.g. `@:component var display:DisplayComponent;`. This does automagically injects `if (display != null) { display = owner.get(DisplayComponent); Assert(display != null, "Game.display cannot be null"); }` in the `onStart()` method. This avoids boilerplate code and is very usable in all game projects that use this entity/component setup, because its readable on which component it depends. In release builds, Assert's are entirely removed. One can also use `@:component(parents)` which does `owner.getFromParents()` or `@:component(children)` or `@:component(optional)` to skip the assert.
 
 Haxe is pretty great for this actually! I can write normal Haxe code, all fields become small names because of my [Haxe obfuscator](https://github.com/markknol/hxobfuscator) lib. 
-I noticed that standard Haxe enums take some space in the output because they can also hold enum values. In most cases it was small change to change that too `enum abstracts`, which is basically comes down to a enum in TypeScript (`<ad>But with more features! E.g. functions can be added or implicit casting functions. Even operator overloading is supported! And no one notices when looking at the output because it is inlined!</ad>`).
+I noticed that standard Haxe enums take some space in the output because they can also hold enum values. In most cases it was small change to change that too `enum abstracts`, which is basically comes down to a enum in TypeScript (`<ad>But with more features! E.g. functions can be added or implicit casting functions. Even operator overloading is supported! And no one notices when looking at the final output because it is all inlined!</ad>`).
 
 In debug builds I can add nice stuff for development (using conditional compilation) and the release build those things are gone and it is very optimized/small.
 
