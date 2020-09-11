@@ -9,6 +9,7 @@ import temple.components.AutoDisposer;
  */
 class AutoRemover extends Component {
 	@:component var display:DisplayComponent;
+
 	public final range:Float;
 
 	public function new(range:Float) {
@@ -16,9 +17,9 @@ class AutoRemover extends Component {
 	}
 
 	override function onUpdate(dt:Float) {
-		if (display.position.x < -range 
-			|| display.position.x > sceneSize.x + range 
-			|| display.position.y < -range 
+		if (display.position.x < -range
+			|| display.position.x > sceneSize.x + range
+			|| display.position.y < -range
 			|| display.position.y > sceneSize.y + range) {
 			AutoDisposer.create(owner);
 		}

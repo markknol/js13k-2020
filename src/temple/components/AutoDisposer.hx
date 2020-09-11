@@ -27,16 +27,17 @@ class AutoDisposer extends Component {
 
 	override public function onUpdate(dt:Float) {
 		if (_cooldown.update(dt)) {
-			for (cb in _callbacks) if (cb != null) cb();
+			for (cb in _callbacks)
+				if (cb != null) cb();
 			if (owner != null) owner.dispose();
 			_cooldown.disable();
 		}
 	}
-	
+
 	/**
 	 * Convenience method to add AutoDisposer to Entity.
-	 * If auto disposer already exists in current entity:  
-	 *  - delay will set to max(current, delay) 
+	 * If auto disposer already exists in current entity:
+	 *  - delay will set to max(current, delay)
 	 *  - callback will be pushed
 	 */
 	public static function create(owner:Entity, delay:Float = 0.0, ?onBeforeDispose:() -> Void):AutoDisposer {

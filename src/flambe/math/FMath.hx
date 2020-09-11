@@ -12,7 +12,6 @@ import temple.units.Radians;
  * Some handy math functions, and inlinable constants.
  */
 class FMath {
-	/*
 	public static inline var E = 2.718281828459045;
 	public static inline var LN2 = 0.6931471805599453;
 	public static inline var LN10 = 2.302585092994046;
@@ -22,7 +21,6 @@ class FMath {
 	public static inline var SQRT2 = 1.4142135623730951;
 	public static var HALF_PI = Math.PI * 0.5;
 
-	*/
 	// Haxe doesn't specify the size of an int or float, in practice it's 32 bits
 
 	/** The lowest integer value in Flash and JS. */
@@ -141,8 +139,8 @@ class FMath {
 
 	/** Calculates the shortest difference between two given angles given in degrees. **/
 	inline public static function deltaAngle(current:Float, target:Float):Float {
-		var value = repeat(target - current, Math.PI*2);
-		if (value > Math.PI) value -= Math.PI*2;
+		var value = repeat(target - current, Math.PI * 2);
+		if (value > Math.PI) value -= Math.PI * 2;
 		return value;
 	}
 
@@ -261,7 +259,7 @@ class FMath {
 	public static inline function distancePow(x1:Float, y1:Float, x2:Float, y2:Float):Float {
 		return Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2);
 	}
-	
+
 	/** Converts an angle in degrees to radians. Serves mostly as a convenience method to convert floats and remain backwards compatible */
 	inline public static function degreesToRadians(degrees:Degrees):Radians {
 		return degrees.toRadians();

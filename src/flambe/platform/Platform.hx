@@ -15,7 +15,6 @@ class Platform {
 
 	public function new() {
 		addMainLoop();
-		
 	}
 
 	function addMainLoop() {
@@ -26,7 +25,7 @@ class Platform {
 			window.requestAnimationFrame(loop);
 		})();
 	}
-	
+
 	inline function update(now:Float) {
 		var dt = (now - _lastUpdate) / 1000;
 		_lastUpdate = now;
@@ -46,7 +45,7 @@ class Platform {
 					keyboard.submitUp(event.keyCode);
 			}
 		}
-		
+
 		_events.addListener(window, "keydown", onKey);
 		_events.addListener(window, "keyup", onKey);
 

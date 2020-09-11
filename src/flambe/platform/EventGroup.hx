@@ -12,9 +12,8 @@ private typedef Listener = Dynamic->Void;
 /**
  * Manages a group of event listeners. When the group is disposed, all listeners are removed.
  */
-class EventGroup  {
-	public inline function new() {
-	}
+class EventGroup {
+	public inline function new() {}
 
 	/** Register a listener with this group. */
 	public inline function addListener<D:IEventDispatcher>(dispatcher:D, type:String, listener:Listener, useCapture:Bool = false) {

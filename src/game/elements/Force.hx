@@ -9,6 +9,7 @@ import temple.geom.Vector2;
  */
 class Force extends Component {
 	@:component var display:DisplayComponent;
+
 	public final velocity:Vector2;
 
 	public function new(velocity:Vector2) {

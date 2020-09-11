@@ -4,6 +4,8 @@
   "scripts": {
     "build:debug": "haxe build-debug.hxml",
     "build:release": "haxe build-release.hxml",
+    "format": "haxelib run formatter -s src",
+    "haxelib": "haxelib",
     "haxe": "haxe",
     "lix": "lix",
     "postinstall": "lix download"

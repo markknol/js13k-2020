@@ -13,7 +13,7 @@ abstract Maybe<T>(Null<T>) from T from Null<T> {
 	public inline function sure():T {
 		#if debug
 		return if (exists()) this else Assert.fail('No value for $this');
-		#else 
+		#else
 		return this;
 		#end
 	}

@@ -61,12 +61,12 @@ using flambe.util.BitSets;
 
 	/** This entity's layer index, used for display ordering. Is set each frame by MainLoop. */
 	public var layerIndex:Int;
-	
+
 	/** Time scale that is applied as a multiplier to the delta time of all children updates. */
 	public var timeScale:Float = 1.0;
 
 	public function new() {}
-	
+
 	/**
 	 * Convenience method to set time
 	 */
@@ -74,6 +74,7 @@ using flambe.util.BitSets;
 		this.timeScale = scale;
 		return this;
 	}
+
 	/**
 	 * Add a component, entity or array.
 	 * @returns This instance, for chaining.
@@ -130,7 +131,7 @@ using flambe.util.BitSets;
 
 		component.owner = this;
 		component.next = null;
-		//component.onAdded();
+		// component.onAdded();
 
 		return this;
 	}
@@ -202,18 +203,18 @@ using flambe.util.BitSets;
 
 	/**
 	 * Maps a function to a components.
-	 * If one argument is null, callback isn't called. 
+	 * If one argument is null, callback isn't called.
 	 * Arguments should be explicitly typed.
-	 * 
-	 * Example usage:  
+	 *
+	 * Example usage:
 	 * ```
 	 * entity.map((display:DisplayComponent, animator:TransformAnimator) -> trace(display, animator));
 	 * ```
 	 */
 	#if (display || dox)
-	public static function map<A:Component>(self:Entity, componentClass:Class<A>, f:haxe.extern.Rest<A> -> Void):Entity return self;
+	public static function map<A:Component>(self:Entity, componentClass:Class<A>, f:haxe.extern.Rest<A>->Void):Entity return self;
 	#else
-	macro public static function map<A:Component>(self:ExprOf<Entity>, callback:ExprOf< haxe.extern.Rest<A> -> Void >):ExprOf<Entity> {
+	macro public static function map<A:Component>(self:ExprOf<Entity>, callback:ExprOf<haxe.extern.Rest<A>->Void>):ExprOf<Entity> {
 		var asserts:Array<Expr> = [];
 		var components:Array<Expr> = [];
 		switch callback.expr {
@@ -224,20 +225,20 @@ using flambe.util.BitSets;
 						case TPath(p): macro $i{p.name};
 						default: null;
 					}
-					asserts.push(macro if (!scope.has($componentClass)) return scope );
-					components.push(macro scope.get($componentClass) );
+					asserts.push(macro if (!scope.has($componentClass)) return scope);
+					components.push(macro scope.get($componentClass));
 				}
-			default: 
+			default:
 				Context.error('Entity.map argument "callback" should be a function', self.pos);
 		}
-		return macro (function(scope:Entity) {
+		return macro(function(scope:Entity) {
 			$b{asserts};
-			$callback( $a{components} );
+			$callback($a{components});
 			return scope;
 		})($self);
 	}
 	#end
-	
+
 	/**
 	 * Gets a component of a given type from this entity, or any of its parents. Searches upwards in
 	 * the hierarchy until the component is found, or returns null if not found.
@@ -248,7 +249,8 @@ using flambe.util.BitSets;
 	macro public static function getFromParents<A>(self:ExprOf<Entity>, componentClass:ExprOf<Class<A>>):ExprOf<A> {
 		var type = requireComponentType(componentClass);
 		var name = macro $componentClass.NAME;
-		return needSafeCast(type) ? macro $self._internal_getFromParents($name, $componentClass) : macro $self._internal_unsafeCast($self._internal_getFromParents($name), $componentClass);
+		return needSafeCast(type) ? macro $self._internal_getFromParents($name,
+			$componentClass) : macro $self._internal_unsafeCast($self._internal_getFromParents($name), $componentClass);
 	}
 	#end
 
@@ -262,7 +264,8 @@ using flambe.util.BitSets;
 	macro public static function getFromChildren<A>(self:ExprOf<Entity>, componentClass:ExprOf<Class<A>>):ExprOf<A> {
 		var type = requireComponentType(componentClass);
 		var name = macro $componentClass.NAME;
-		return needSafeCast(type) ? macro $self._internal_getFromChildren($name, $componentClass) : macro $self._internal_unsafeCast($self._internal_getFromChildren($name), $componentClass);
+		return needSafeCast(type) ? macro $self._internal_getFromChildren($name,
+			$componentClass) : macro $self._internal_unsafeCast($self._internal_getFromChildren($name), $componentClass);
 	}
 	#end
 
@@ -506,6 +509,8 @@ using flambe.util.BitSets;
 
 @:noCompletion private abstract EntityOrComponent(EntityType) from EntityType {
 	@:from inline static function fromEntity(a:Entity):EntityOrComponent return EntityType.E(a);
+
 	@:from inline static function fromComponent<A:Component>(a:A):EntityOrComponent return EntityType.C(a);
+
 	@:from inline static function fromArray(a:Array<EntityOrComponent>):EntityOrComponent return EntityType.A(a);
 }

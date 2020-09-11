@@ -33,7 +33,7 @@ class FrameDelay extends Component {
 			}
 			dispose();
 		} else {
-			_currentFrame --;
+			_currentFrame--;
 		}
 	}
 

@@ -9,15 +9,13 @@ import temple.utils.EntityUtils;
 class ScareComponent extends Component {
 	@:component var _wobbly:WobblyPathComponent;
 
-	public function new() {
-		
-	}
-	
+	public function new() {}
+
 	override function onUpdate(dt:Float) {
 		if (_wobbly.isPointerDown && _wobbly.interactive) {
 			_wobbly.isScared = true;
 		} else {
-			_wobbly.isScared = false; 
+			_wobbly.isScared = false;
 		}
 		var childPaths:Array<WobblyPathComponent> = EntityUtils.getComponentsFromChildren(owner, WobblyPathComponent.NAME, 10);
 		for (child in childPaths) {

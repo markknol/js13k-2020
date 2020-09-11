@@ -3,7 +3,7 @@ package temple.geom;
 import flambe.math.FMath;
 import temple.units.Radians;
 
-@:dox(show) private typedef Vector2Impl = {x:Float,y:Float};
+@:dox(show) private typedef Vector2Impl = {x:Float, y:Float};
 
 /**
 	Represents a two dimensional vector.
@@ -20,16 +20,20 @@ abstract Vector2(Vector2Impl) from Vector2Impl to Vector2Impl {
 	public var rotatedRight(get, never):Vector2;
 
 	public var x(get, set):Float;
+
 	inline function get_x() return this.x;
+
 	inline function set_x(v) return this.x = v;
-	
+
 	public var y(get, set):Float;
+
 	inline function get_y() return this.y;
+
 	inline function set_y(v) return this.y = v;
-	
+
 	/** Construct a new vector instance. **/
 	public inline function new(x:Float, y:Float) {
-		this = {x:x, y:y};
+		this = {x: x, y: y};
 	}
 
 	private var self(get, never):Vector2;
@@ -564,6 +568,7 @@ abstract Vector2(Vector2Impl) from Vector2Impl to Vector2Impl {
 	#end
 
 	@:from public static inline function fromFloatArray(vec:Array<Float>):Vector2 return new Vector2(vec[0], vec[1]);
+
 	@:from public static inline function fromIntArray(vec:Array<Int>):Vector2 return new Vector2(vec[0], vec[1]);
 
 	public inline function toString(prefix:String = null):String {

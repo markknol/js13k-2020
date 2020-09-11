@@ -6,7 +6,7 @@ package flambe.platform;
 import flambe.input.Key;
 
 /**
- * Key codes 
+ * Key codes
  */
 class KeyCodes {
 	public static function toKey(keyCode:Int):Key {

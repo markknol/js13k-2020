@@ -18,7 +18,7 @@ class MainLoop {
 		if (dt <= 0) {
 			// This can happen on platforms that don't have monotonic timestamps and are prone to
 			// system clock adjustment
-			//trace("Zero or negative time elapsed since the last frame!", ["dt", dt]);
+			// trace("Zero or negative time elapsed since the last frame!", ["dt", dt]);
 			return;
 		}
 		if (dt > 1) {
@@ -38,7 +38,7 @@ class MainLoop {
 		if (timeScaleAdjuster != null) {
 			timeScaleAdjuster._realDt = dt;
 			dt *= timeScaleAdjuster.scale._;
-			
+
 			if (dt <= 0) {
 				// This entity is paused, avoid descending into children. But do update the speed
 				// adjuster (so it can still be animated)
@@ -46,7 +46,7 @@ class MainLoop {
 				return;
 			}
 		}
-		
+
 		// Update components
 		var p:Component = entity.firstComponent;
 

@@ -32,19 +32,18 @@ class TimeScaleAdjuster extends Component {
 			_entity = owner;
 		}
 	}
-	
+
 	// Note that this may be called by MainLoop before onStarted!
-    override public function onUpdate(dt:Float)
-    {
-        // Ensure this component is immune to its own time scaling
-        if (_realDt > 0) {
-            dt = _realDt;
-            _realDt = 0;
-        }
+	override public function onUpdate(dt:Float) {
+		// Ensure this component is immune to its own time scaling
+		if (_realDt > 0) {
+			dt = _realDt;
+			_realDt = 0;
+		}
 
-        scale.update(dt);
+		scale.update(dt);
 		_entity.timeScale = scale._;
-    }
+	}
 
-    @:allow(flambe) var _realDt :Float = 0;
+	@:allow(flambe) var _realDt:Float = 0;
 }

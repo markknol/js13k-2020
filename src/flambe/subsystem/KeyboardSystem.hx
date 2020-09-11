@@ -40,7 +40,7 @@ import flambe.util.SignalConnection;
 	 * @returns True if the given key is currently being held down.
 	 */
 	function isDown(key:Key):Bool;
-	
+
 	/**
 	 * Connect key to handler.
 	 */

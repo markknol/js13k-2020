@@ -1,33 +1,17 @@
 package game;
 
-import flambe.Component;
-import flambe.DisplayComponent;
-import flambe.System;
+import flambe.*;
 import flambe.math.FMath;
 import game.Color;
-import game.display.PathMacro;
-import game.display.ProgressBar;
-import game.display.RandomizePath;
-import game.display.SVGs;
-import game.display.ScoreComponent;
-import game.display.WobblyPathComponent;
-import game.display.WobblyRect;
-import game.elements.AutoRemover;
-import game.elements.Force;
-import game.elements.Moment;
-import game.elements.Snake;
-import music.AudioPlayer;
+import game.display.*;
+import game.elements.*;
 import haxe.ds.ReadOnlyArray;
 import js.html.SpeechSynthesisUtterance;
-import js.html.audio.AudioContext;
 import js.lib.Math;
-import music.AudioNote;
-import music.AudioPitchedNote;
-import music.AudioPlayer;
-import music.AudioScheduler;
+import music.*;
+import temple.components.Cooldown;
 import temple.geom.Vector2;
 import temple.random.Random;
-import temple.components.Cooldown;
 
 /**
  * @author Mark Knol
@@ -59,52 +43,70 @@ class Game extends Component {
 	private var _totalWords:Int;
 	private var _totalWordsCollected:Int = 0;
 	
+	private final _isSpeechSynesisSupported:Bool;
+	
 	private final _progressBar:ProgressBar = new ProgressBar(sceneSize.x - 50);
 	private final _textCooldown = new Cooldown(4.0);
 	private final _player:Snake = new Snake();
 	
 	public function new() {
 		this.soundPlayer = new AudioPlayer(System.audioContext, createMusic);
-		_theWord = new SpeechSynthesisUtterance();
+		_theWord = try new SpeechSynthesisUtterance() catch (e) null;
+		_isSpeechSynesisSupported = _theWord != null;
 		
 		_totalWordsCollected = 0;
 		_totalWords = 0;
-		for (line in _lines) _totalWords += line.split(" ").length;
+		for (line in _lines) {
+			_totalWords += line.split(" ").length;
+		}
 	}
 
 	override function onStart() {
 		super.onStart();
 		
 		owner.add(moments);
+		owner.addEntity(new Entity()
+			.addComponent(_player));
+			
+		owner.addEntity(new Entity()
+			.addComponent(new WobblyRect(200, 80)
+				.setXY(175 - 25, 75)
+				.setAlpha(0.5)));
 		
-		owner.addEntity(new Entity().addComponent(_player));
-		
-		owner.addEntity(new Entity().addComponent(new WobblyRect(200, 80).setXY(175 - 25, 75).setAlpha(0.5)));
-		owner.addEntity(new Entity().addComponent(new WobblyRect(200, 80).setXY(sceneSize.x - 125- 25, 75).setAlpha(0.5)));
+		owner.addEntity(new Entity()
+			.addComponent(new WobblyRect(200, 80)
+				.setXY(sceneSize.x - 125 - 25, 75)
+				.setAlpha(0.5)));
 		
 		owner.addEntity(new Entity()
 			.add(new ScoreComponent(RED, _player.collection.value1)
 				.setXY(175, 85)));
+		
 		owner.addEntity(new Entity()
 			.add(new ScoreComponent(GREEN, _player.collection.value2)
 				.setXY(sceneSize.x - 125, 85)));
-				
+		
 		owner.addEntity(new Entity()
 			.add(_progressBar
 				.setXY(25, sceneSize.y - 30)));
 	}
-	
+
 	override public function onUpdate(dt:Float):Void {
 		super.onUpdate(dt);
 		
-		if (!window.speechSynthesis.speaking && _textCooldown.update(dt)) {
+		var isSpeaking = (_isSpeechSynesisSupported && window.speechSynthesis.speaking);
+		if (!_isSpeechSynesisSupported) isSpeaking = false;
+		
+		if (!isSpeaking && _textCooldown.update(dt)) {
 			if (_lines.length > 0) {
 				final text = _lines.shift();
-				_theWord.text = text;
-				_theWord.lang = 'en-US';
-				_theWord.rate = 0.75;
-				// say it
-				window.speechSynthesis.speak(_theWord);
+				if (_isSpeechSynesisSupported) {
+					_theWord.text = text;
+					_theWord.lang = 'en-US';
+					_theWord.rate = 0.75;
+					// say it
+					window.speechSynthesis.speak(_theWord);
+				}
 				
 				var words = text.split(" ");
 				for (i in 0...words.length) {
@@ -137,7 +139,7 @@ class Game extends Component {
 				_progressTarget = _totalWordsCollected / _totalWords;
 				
 				// take a breath
-				_textCooldown.reset(1.5 + Math.random());
+				_textCooldown.reset(_isSpeechSynesisSupported ? 1.5 + Math.random() : 4.5);
 			} else {
 				_player.kill();
 				_textCooldown.disable();
@@ -148,7 +150,7 @@ class Game extends Component {
 			_scheduler.update(soundPlayer, soundPlayer.audioContext.currentTime);
 			_soundPlayerCooldown.reset(1.0);
 		}
-		
+	
 		if (_randomElementCooldown.update(dt)){
 			owner.addEntity(getRandomElement(
 				GRAY,
@@ -162,7 +164,7 @@ class Game extends Component {
 		_progressBar.setProgress(_progress);
 		
 	}
-	
+
 	public function getMoment(color:Color, size:Vector2, position:Vector2, velocity:Vector2):Entity {
 		return new Entity().add([
 			new WobblyPathComponent({
@@ -182,7 +184,7 @@ class Game extends Component {
 			new AutoRemover(200),
 		]);
 	}
-	
+
 	public function getRandomElement(color:Color, size:Vector2, position:Vector2, velocity:Vector2):Entity {
 		return new Entity().add([
 			new WobblyPathComponent({
@@ -204,7 +206,7 @@ class Game extends Component {
 			new AutoRemover(200),
 		]).map((p:WobblyPathComponent) -> p.isScared = true);
 	}
-	
+
 	private function createMusic() {
 		final chords:ReadOnlyArray<Array<AudioNote>> = [
 			[C, G], [G, D],
@@ -237,12 +239,11 @@ class Game extends Component {
 					soundPlayer.playNotes(false, notes, duration, time);
 				});
 			}
-
 			delay += duration * 2;
 		}
 		_scheduler.update(soundPlayer, soundPlayer.audioContext.currentTime);
 	}
-	
+
 	public inline function end() {
 		System.root.add(new Entity().add(new Outro()));
 		// window.location.reload.bind(false);

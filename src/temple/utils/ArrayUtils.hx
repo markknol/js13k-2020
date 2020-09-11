@@ -63,5 +63,4 @@ class ArrayUtils {
 	public static inline function empty<T>(it:Array<T>):Bool {
 		return it.length == 0;
 	}
-
 }

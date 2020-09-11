@@ -228,12 +228,14 @@ class Ease {
 
 	/** Elastic in. */
 	public static function elasticIn(t:Float):Float {
-		return -(ELASTIC_AMPLITUDE * Math.pow(2, 10 * (t -= 1)) * Math.sin((t - (ELASTIC_PERIOD / PI2 * Math.asin(1 / ELASTIC_AMPLITUDE))) * PI2 / ELASTIC_PERIOD));
+		return -(ELASTIC_AMPLITUDE * Math.pow(2,
+			10 * (t -= 1)) * Math.sin((t - (ELASTIC_PERIOD / PI2 * Math.asin(1 / ELASTIC_AMPLITUDE))) * PI2 / ELASTIC_PERIOD));
 	}
 
 	/** Elastic out. */
 	public static function elasticOut(t:Float):Float {
-		return (ELASTIC_AMPLITUDE * Math.pow(2, -10 * t) * Math.sin((t - (ELASTIC_PERIOD / PI2 * Math.asin(1 / ELASTIC_AMPLITUDE))) * PI2 / ELASTIC_PERIOD) + 1);
+		return (ELASTIC_AMPLITUDE * Math.pow(2, -10 * t) * Math.sin((t - (ELASTIC_PERIOD / PI2 * Math.asin(1 / ELASTIC_AMPLITUDE))) * PI2 / ELASTIC_PERIOD)
+			+ 1);
 	}
 
 	/** Elastic in and out. */

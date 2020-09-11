@@ -1,4 +1,5 @@
 package game.display;
+
 import temple.geom.Vector2;
 
 /**
@@ -9,6 +10,7 @@ class SVGs {
 	public static var START = PathMacro.encode("svg/start.svg");
 	public static var OWNER = PathMacro.encode("svg/owner.svg");
 	#end
+
 	public static function getNumber(no:Int):Array<Array<Vector2>> {
 		return switch no {
 			case 0: game.display.PathMacro.encode("svg/0.svg");
@@ -23,7 +25,7 @@ class SVGs {
 			default: game.display.PathMacro.encode("svg/9.svg");
 		}
 	}
-	
+
 	// decode array with data for numbers. format: [offsetX, offsetY, x,y,x,y,x,y...]
 	public static function parsePath(data:Array<Array<Int>>):Array<Array<Vector2>> {
 		var paths = [];
@@ -32,13 +34,13 @@ class SVGs {
 			paths.push(path);
 			var offsetY = numbers.shift();
 			var offsetX = numbers.shift();
-			
+
 			for (idx => char in numbers) {
 				if (idx % 2 == 0) {
 					var x1:Float = char + offsetX;
 					var y1:Float = numbers[idx + 1] + offsetY;
 					path.push([x1, y1]);
-					//trace(x1, y1);
+					// trace(x1, y1);
 				}
 			}
 		}

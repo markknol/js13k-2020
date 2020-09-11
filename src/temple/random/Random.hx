@@ -13,7 +13,6 @@ enum abstract Random(ISeededRandom) to ISeededRandom {
 	 * Uses native random
 	 */
 	public static final native:Random = new Random(new NativeRandom());
-
 	public var seed(never, set):Int;
 
 	public function new(random:ISeededRandom) {
@@ -76,7 +75,7 @@ enum abstract Random(ISeededRandom) to ISeededRandom {
 	public inline function bool(chance:Float = .5):Bool {
 		return next() <= chance;
 	}
-	
+
 	/** get random value from array **/
 	public inline function fromArray<T>(array:Array<T>, doSplice:Bool = false):T {
 		return ArrayUtils.randomElement(array, cast this, doSplice);

@@ -58,7 +58,7 @@ class Line {
 		this.setPoint2(target.point2.x, target.point2.y);
 		return this;
 	}
-	
+
 	/** Copy component values from `target` line to `this` line. **/
 	public inline function copyFromVectors(point1:Vector2, point2:Vector2):Line {
 		this.setPoint1(point1.x, point1.y);

@@ -18,12 +18,12 @@ class StageSystem implements Disposable {
 	public var orientation = new Value<Orientation>(null);
 	public var width(get, null):Int;
 	public var height(get, null):Int;
-	public var container(get,never):Element;
+	public var container(get, never):Element;
 
 	private var _containerWidth:Int;
 	private var _containerHeight:Int;
 	private var _containerDiv:Element;
-	
+
 	private var _events:EventGroup = new EventGroup();
 
 	public var resizeSignal(default, null):Signal2<Int, Int> = new Signal2<Int, Int>();
@@ -121,7 +121,7 @@ class StageSystem implements Disposable {
 
 		return true;
 	}
-	
+
 	public function requestFullScreen() {
 		var isFullscreen = HtmlUtil.loadExtension("fullscreenElement", document);
 		if (isFullscreen.value == null) {

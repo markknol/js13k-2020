@@ -13,12 +13,12 @@ enum abstract AudioNote(Int) {
 	final A;
 	final ASharp;
 	final B;
-	
 	// allow operators
 	@:op(a < b) static function lt(a:AudioNote, b:AudioNote):Bool;
+
 	@:op(a > b) static function gt(a:AudioNote, b:AudioNote):Bool;
-	
+
 	public inline function toMidi(octave:Int):Int {
-		return  (octave * 12) + this;
+		return (octave * 12) + this;
 	}
 }

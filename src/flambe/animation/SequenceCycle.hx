@@ -22,9 +22,7 @@ class SequenceCycle implements Behavior {
 
 	public function update(dt:Float):Float {
 		_elapsed += dt * (1 / _interval);
-		return 
-			if (isComplete()) _values[_values.length - 1];
-			else _values[Std.int((_elapsed * _values.length) % _values.length)];
+		return if (isComplete()) _values[_values.length - 1]; else _values[Std.int((_elapsed * _values.length) % _values.length)];
 	}
 
 	public function isComplete():Bool {

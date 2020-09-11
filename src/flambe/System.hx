@@ -14,8 +14,8 @@ import js.html.audio.AudioContext;
  * @author Mark Knol
  */
 class System {
-	public static var keyboard(get,null):KeyboardSystem;
-	
+	public static var keyboard(get, null):KeyboardSystem;
+
 	/** The entity at the root of the hierarchy. **/
 	public static var root(default, null):Entity;
 
@@ -23,7 +23,7 @@ class System {
 	public static var renderer(default, null):Renderer;
 
 	private static var platform(default, null):Platform;
-	
+
 	public static var audioContext(default, null):AudioContext;
 
 	public static function init(element:Element) {
@@ -37,7 +37,7 @@ class System {
 		renderer.onFirstTap = e -> audioContext = js.Syntax.code("new({0}.AudioContext||{0}.webkitAudioContext)", window);
 		// create platform
 		platform = new Platform();
-		
+
 		#if debug
 		addSpeedAdjusterKeys();
 		#end
@@ -61,12 +61,11 @@ class System {
 					scale._ = 1;
 				case Key.P:
 					scale._ = 0;
-					
+
 				default:
 			}
 
 			if (old != scale._) trace("Speed Adjuster scale: " + scale._);
 		});
 	}
-	
 }

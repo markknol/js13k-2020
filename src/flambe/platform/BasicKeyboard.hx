@@ -67,7 +67,7 @@ class BasicKeyboard implements KeyboardSystem {
 			up.emit(_sharedEvent);
 		}
 	}
-	
+
 	public function connect(key:Key, fn:() -> Void):SignalConnection {
 		return down.connect(e -> if (e.key == key) fn());
 	}

@@ -36,7 +36,7 @@ class Component implements Disposable {
 	/**
 	 * Called after this component has been added to an entity.
 	 */
-	//public function onAdded():Void {}
+	// public function onAdded():Void {}
 
 	/**
 	 * Called just before this component has been removed from its entity.

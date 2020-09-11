@@ -597,19 +597,11 @@ abstract Matrix3(Matrix3Type) from Matrix3Type to Matrix3Type {
 	}
 
 	private static inline function get_zero():Matrix3 {
-		return new Matrix3(
-			0.0, 0.0, 0.0, 
-			0.0, 0.0, 0.0, 
-			0.0, 0.0, 0.0
-		);
+		return new Matrix3(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 	}
 
 	private static inline function get_identity():Matrix3 {
-		return new Matrix3(
-			1.0, 0.0, 0.0, 
-			0.0, 1.0, 0.0, 
-			0.0, 0.0, 1.0
-		);
+		return new Matrix3(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
 	}
 
 	private inline function get_det():Float {

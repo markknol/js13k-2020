@@ -10,8 +10,8 @@ import flambe.util.Macros;
 
 using Lambda;
 using haxe.macro.Tools;
-//using flambe.util.Iterables;
 
+// using flambe.util.Iterables;
 class ComponentBuilder {
 	public static function build():Array<Field> {
 		var pos = Context.currentPos();
@@ -101,13 +101,19 @@ class ComponentBuilder {
 					var meta:MetadataEntry = field.meta.find(function(m) return m.name == ":disposable");
 					if (meta != null) {
 						var fieldName = field.name;
-						if (meta.params.length == 0) disposeExprs.push(macro if (this.$fieldName != null) { this.$fieldName.dispose(); this.$fieldName = null; });
+						if (meta.params.length == 0) disposeExprs.push(macro if (this.$fieldName != null) {
+							this.$fieldName.dispose();
+							this.$fieldName = null;
+						});
 					}
 				default:
 					var meta:MetadataEntry = field.meta.find(function(m) return m.name == ":disposable");
 					if (meta != null) {
 						var fieldName = field.name;
-						if (meta.params.length == 0) disposeExprs.push(macro if (this.$fieldName != null) { this.$fieldName.dispose(); this.$fieldName = null; });
+						if (meta.params.length == 0) disposeExprs.push(macro if (this.$fieldName != null) {
+							this.$fieldName.dispose();
+							this.$fieldName = null;
+						});
 					}
 			}
 		}

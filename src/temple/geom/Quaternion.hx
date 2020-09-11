@@ -126,11 +126,20 @@ abstract Quaternion(QuaternionType) from QuaternionType to QuaternionType {
 	 */
 	@:op(A * B)
 	public static inline function multiply(a:Quaternion, b:Quaternion):Quaternion {
-		return new Quaternion(
-			a.s * b.s - a.x * b.x - a.y * b.y - a.z * b.z,
-			a.s * b.x + b.s * a.x + a.y * b.z - a.z * b.y,
-			a.s * b.y + b.s * a.y + a.z * b.x - a.x * b.z,
-			a.s * b.z + b.s * a.z + a.x * b.y - a.y * b.x);
+		return new Quaternion(a.s * b.s
+			- a.x * b.x
+			- a.y * b.y
+			- a.z * b.z, a.s * b.x
+			+ b.s * a.x
+			+ a.y * b.z
+			- a.z * b.y,
+			a.s * b.y
+			+ b.s * a.y
+			+ a.z * b.x
+			- a.x * b.z, a.s * b.z
+			+ b.s * a.z
+			+ a.x * b.y
+			- a.y * b.x);
 	}
 
 	/**
@@ -497,11 +506,15 @@ abstract Quaternion(QuaternionType) from QuaternionType to QuaternionType {
 		var a = 2.0 * (self.x * u.x + self.y * u.y + self.z * u.z);
 		var b = self.s * self.s - self.x * self.x - self.y * self.y - self.z * self.z;
 		var c = 2.0 * self.s;
-		
-		return new Vector3(
-			a * self.x + b * u.x + c * (self.y * u.z - self.z * u.y),
-			a * self.y + b * u.y + c * (self.z * u.x - self.x * u.z),
-			a * self.z + b * u.z + c * (self.x * u.y - self.y * u.x));
+
+		return new Vector3(a * self.x
+			+ b * u.x
+			+ c * (self.y * u.z - self.z * u.y), a * self.y
+			+ b * u.y
+			+ c * (self.z * u.x - self.x * u.z),
+			a * self.z
+			+ b * u.z
+			+ c * (self.x * u.y - self.y * u.x));
 	}
 
 	/**
@@ -585,10 +598,11 @@ abstract Quaternion(QuaternionType) from QuaternionType to QuaternionType {
 		var y = self.y;
 		var z = self.z;
 
-		var m = new Matrix3(
-			1 - 2 * (y * y + z * z), 2 * (x * y - s * z), 2 * (s * y + x * z),
-			2 * (x * y + s * z), 1 - 2 * (x * x + z * z), 2 * (y * z - s * x),
-			2 * (x * z - s * y), 2 * (y * z + s * x),  1 - 2 * (x * x + y * y));
+		var m = new Matrix3(1
+			- 2 * (y * y + z * z), 2 * (x * y - s * z), 2 * (s * y + x * z), 2 * (x * y + s * z), 1
+			- 2 * (x * x + z * z),
+			2 * (y * z - s * x), 2 * (x * z - s * y), 2 * (y * z + s * x), 1
+			- 2 * (x * x + y * y));
 
 		return m;
 	}
