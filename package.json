@@ -1,15 +1,15 @@
 {
-  "name": "404 - Mark Knol - js13k",
+  "name": "js13k-2020-markknol",
   "version": "1.0.0",
   "scripts": {
     "build:debug": "haxe build-debug.hxml",
     "build:release": "haxe build-release.hxml",
     "haxe": "haxe",
     "lix": "lix",
-    "postinstall": "lix download",
+    "postinstall": "lix download"
   },
   "devDependencies": {
     "terser": "=5.2.0",
     "lix": "=15.9.0"
-  },
+  }
 }
