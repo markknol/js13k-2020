@@ -11,16 +11,18 @@ Should work on desktop and mobile devices.
 # Post mortem
 
 #### Concept
+<a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-gameplay.gif" width="40%" align="right" /></a>
 
 This is the first time I joined the js13k gamejam. The idea is to create a game in 13kb (zipped). Making games is fun! Not only for the player, but for a developer too. 
 
 > To illustration how small 13kb is: If you have a iPhone X and you take a selfie, that's 2.93MB, so this game fits 225 times in that. Or, if you have a phone with 64gb of storage, you can have 5.000.000 copies of this game on your phone. 🤯
 
-<a href="https://games.stroep.nl/hx13k-2020"><img src="js13k-2020-markknol-gameplay.gif" width="40%" align="right" /></a>
 
 #### Getting started
 
-To prove to myself it is perfectly possible to use Haxe for this, I started to create a small engine in Haxe. I called the project hx13k initially. 
+<img src="https://haxe.org/img/branding/haxe-logo-vertical-white-background.png" width="100" align="left" />
+
+To prove to myself it is perfectly possible to use [Haxe](https://haxe.org) for this, I started to create a small engine in Haxe. I called the project hx13k initially. Haxe is a programming languages that compiles to [many languages](https://haxe.org/documentation/introduction/compiler-targets.html), including JavaScript / ES6. 
 As main part of my daily job I am game developer and make HTML5 adver games, so I liked the idea of this jam.
 First I started by making a basic engine. Or actually, I stripped down this setup I normally use, which is combination of [pixi.js](https://github.com/pixijs/pixi.js) and a customized [Flambe](https://github.com/aduros/flambe) library. 
 I am big fan of using Entity/Component and the way the Flambe library did it is how I like to work, it's very pragmatic and usable for creating games. I hoped this wasn't too much of overhead.
@@ -54,9 +56,9 @@ Start modifiers are applied once (so are some sort of pre-processors) and are pe
 Since I wanted to use all the Haxe goodness, I created simple build macro that logs sizes and puts it in a zip file, when I create a release build. 
 The build tool calls terser to minify the build and I manually move replaced some tokens.
 
-I added the [no-spoon] library (also macro) to tone down `Std.string`; this is a to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code.
+I added the [no-spoon](https://github.com/back2dos/no-spoon/) library (also macro) to tone down `Std.string`; this is a to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code.
 
-Haxe is pretty great for this actually! I can write normal Haxe code, all fields become small names because of my [Haxe obfuscator]() lib. 
+Haxe is pretty great for this actually! I can write normal Haxe code, all fields become small names because of my [Haxe obfuscator](https://github.com/markknol/hxobfuscator) lib. 
 I noticed that standard Haxe enums take some space in the output because they can also hold enum values. In most cases it was easy to change that too `enum abstracts`, which is basically comes down to a enum in TypeScript (`<ad>But with more features! E.g. you can add functions and own from/to cast functions. Even operator overloading is supported! And no one notices when looking at the output because it is inlined!</ad>`).
 
 In debug builds I can add nice stuff for development (using conditional compilation) and the release build those things are gone and it is very optimized/small.
