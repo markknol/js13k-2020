@@ -53,12 +53,11 @@ Start modifiers are applied once and are permanent, update modifiers are tempora
 
 #### Make everything small
 
-Since I wanted to use all the Haxe goodness, I created simple build macro that logs sizes and puts it in a zip file, when I create a release build. 
-The build tool calls terser to minify the build and I manually move replaced some tokens.
+Haxe allows generalized metaprogramming, which they call [macros](https://haxe.org/manual/macro.html). The project contains some macros to increase development fun, avoid boilerplate code and reduce filesize. All macro's run in the same compile step, so I don't need to call any external tool or something, it is integrated. For example I created a [small macro](src/game/display/PathMacro.hx) that takes the [SVG files](./svg/) and inject them in the code as an array with integers, which is converted to vectors in runtime. 
+
+I created [build tool](src/BuildTool.hx) (a macro that runs after compilation is done) that logs sizes and creates the final zip-file. The build tool calls [terser](https://www.npmjs.com/package/terser) to minify the build but I also manually replaced some tokens after that in the same macro.
 
 I added the [no-spoon](https://github.com/back2dos/no-spoon/) library (also macro) to tone down `Std.string`; this is a to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code.
-
-Haxe allows generalized metaprogramming, which they call [macros](https://haxe.org/manual/macro.html). The project contains some macros to increase development fun, avoid boilerplate code and reduce filesize. For example I created a [small macro](src/game/display/PathMacro.hx) that takes the [SVG files](./svg/) and inject them in the code as an array with integers, which is converted to vectors in runtime. 
 
 There is another macro that consumes the metadata `@:component` which can be applied on fields, e.g. `@:component var display:DisplayComponent;`. This does automagically injects `if (display != null) { display = owner.get(DisplayComponent); Assert(display != null, "Game.display cannot be null"); }` in the `onStart()` method. This avoids boilerplate code and is very usable in all game projects that use this entity/component setup, because its readable on which component it depends. In release builds, Assert's are entirely removed. One can also use `@:component(parents)` which does `owner.getFromParents()` or `@:component(children)` or `@:component(optional)` to skip the assert.
 
