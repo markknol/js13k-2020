@@ -66,7 +66,10 @@ The collision is not super accurate because it uses random, but it's good enough
 
 #### Make everything small
 
-Haxe allows generalized metaprogramming, which they call [macros](https://haxe.org/manual/macro.html). The project contains some macros to increase development fun, avoid boilerplate code and reduce filesize. All macro's run in the same compile step, so I don't need to call any external tool or something, it is integrated. For example I created a [small macro](src/game/display/PathMacro.hx) that takes the [SVG files](./svg/) and inject them in the code as an array with integers, which is converted to vectors in runtime. 
+Haxe allows generalized metaprogramming, which they call [macros](https://haxe.org/manual/macro.html). The project contains some macros to increase development fun, avoid boilerplate code and reduce filesize. All macro's run in the same compile step, so I don't need to call any external tool or something, it is integrated. For example I created a [small macro](src/game/display/PathMacro.hx) that takes the [SVG files](./svg/) and inject them in the code as an array with integers, which is converted to vectors in runtime. The internal presentation of the text/numbers are actually quite small, they are made fancy with the procedural step I add afterwards. For example this is how it looks internally (left) and how it is presented (right)
+
+![small svg](https://user-images.githubusercontent.com/576184/93134324-e72bd600-f6d8-11ea-8204-312b55e5ec72.png)
+
 
 I created [build tool](src/BuildTool.hx) (a macro that runs after compilation is done) that logs sizes and creates the final zip-file. The build tool calls [terser](https://www.npmjs.com/package/terser) to minify the build but I also manually replaced some tokens after that in the same macro.
 
@@ -78,6 +81,7 @@ This is the code:
 * The renderer/entity/component system is ~7kb minified, ~3kb zipped.
 * The actual scenes / game is ~27kb minified, ~8.5kb zipped.
 * The numbers are the SVG data, which are the numbers and text from the intro. 
+
 
 Haxe is pretty great for this actually! I can write normal Haxe code, all fields become small names because of my [Haxe obfuscator](https://github.com/markknol/hxobfuscator) lib. 
 I noticed that standard Haxe enums take some space in the output because they can also hold enum values. In most cases it was small change to change that too `enum abstracts`, which is basically comes down to a enum in TypeScript (`<ad>But with more features! E.g. functions can be added or implicit casting functions. Even operator overloading is supported! And no one notices when looking at the final output because it is all inlined!</ad>`).
