@@ -33,6 +33,7 @@ Then I added my own simple custom canvas [renderer](src/flambe/Renderer.hx). It 
 
 #### Interaction
 
+<img src="https://user-images.githubusercontent.com/576184/93136297-f4968f80-f6db-11ea-9e03-741eea23b668.gif" width="200" align="left" />
 I noticed that I needed interaction too (for everything one can tap on), so made simple system to allow object to be tapped.
 Now, I don't know how normal people do this in 2d canvas, but I haven't found a native way to do it. So the way I approached it was kinda hacky, but.. it worked out. 
 I created another (hidden) canvas pure for interaction. The mainloop iterates each tick on all entities. 
