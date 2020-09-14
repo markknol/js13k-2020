@@ -69,6 +69,11 @@ The detections kinda works like this:
 
 The collision is not super accurate because it uses random, but it's good enough™ and isn't very heavy.
 
+#### Procedural music and voice over
+
+The music is [procedurally generated](https://twitter.com/mknol/status/1301193570842484738?s=19) with web audio and the voiceover is done using the web text to speech API.
+The voice seems to depend per device, some get a male, some a female voice. Both are fine!
+
 #### Make everything small
 
 Haxe allows generalized metaprogramming, which they call [macros](https://haxe.org/manual/macro.html). The project contains some macros to increase development fun, avoid boilerplate code and reduce filesize. All macro's run in the same compile step, so I don't need to call any external tool or something, it is integrated. For example I created a [small macro](src/game/display/PathMacro.hx) that takes the [SVG files](./svg/) and inject them in the code as an array with integers, which is converted to vectors in runtime. The internal presentation of the text/numbers are actually quite small, they are made fancy with the procedural step I add afterwards. For example this is how it looks internally (left) and how it is presented (right)
