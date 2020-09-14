@@ -51,6 +51,19 @@ It basically takes an array of transformers, a transformer takes gets a point in
 The game is mostly build of lines. So I developed a system where lines have start- and update modifiers, which take a path in and return a modified path. 
 Start modifiers are applied once and are permanent, update modifiers are temporary applied each frame, just before it draws.
 
+#### Object in loop collision detection
+
+<img src="https://user-images.githubusercontent.com/576184/93133081-f3af2f00-f6d6-11ea-8b33-aaea2f759032.gif" align="right" height="200" />
+
+The detections kinda works like this:
+
+- The snake is build out of segments
+- Check if a segment of the snake collides with another segment. If so, there is a loop.
+- Using random sampled points in range of this loops first/last segment, a few line segments are created.
+- If these line segments hit the objects that float in space, there is the collision.
+
+The collision is not super accurate because it uses random, but it's good enough™ and isn't very heavy.
+
 #### Make everything small
 
 Haxe allows generalized metaprogramming, which they call [macros](https://haxe.org/manual/macro.html). The project contains some macros to increase development fun, avoid boilerplate code and reduce filesize. All macro's run in the same compile step, so I don't need to call any external tool or something, it is integrated. For example I created a [small macro](src/game/display/PathMacro.hx) that takes the [SVG files](./svg/) and inject them in the code as an array with integers, which is converted to vectors in runtime. 
@@ -59,12 +72,21 @@ I created [build tool](src/BuildTool.hx) (a macro that runs after compilation is
 
 I added the [no-spoon](https://github.com/back2dos/no-spoon/) library (also macro) to replace `Std.string`; this is Haxe's build-in to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code. I don't need this, so I replaced it with something that just returns itself.
 
-There is another macro that consumes the metadata `@:component` which can be applied on fields, e.g. `@:component var display:DisplayComponent;`. This does automagically injects `if (display != null) { display = owner.get(DisplayComponent); Assert(display != null, "Game.display cannot be null"); }` in the `onStart()` method. This avoids boilerplate code and is very usable in all game projects that use this entity/component setup, because its readable on which component it depends. In release builds, Assert's are entirely removed. One can also use `@:component(parents)` which does `owner.getFromParents()` or `@:component(children)` or `@:component(optional)` to skip the assert.
+This is the code:
+![js13k code](https://user-images.githubusercontent.com/576184/93130550-fc056b00-f6d2-11ea-9efd-fbc300e75fb6.png)
+
+* The renderer/entity/component system is ~7kb minified, ~3kb zipped.
+* The actual scenes / game is ~27kb minified, ~8.5kb zipped.
+* The numbers are the SVG data, which are the numbers and text from the intro. 
 
 Haxe is pretty great for this actually! I can write normal Haxe code, all fields become small names because of my [Haxe obfuscator](https://github.com/markknol/hxobfuscator) lib. 
 I noticed that standard Haxe enums take some space in the output because they can also hold enum values. In most cases it was small change to change that too `enum abstracts`, which is basically comes down to a enum in TypeScript (`<ad>But with more features! E.g. functions can be added or implicit casting functions. Even operator overloading is supported! And no one notices when looking at the final output because it is all inlined!</ad>`).
 
 In debug builds I can add nice stuff for development (using conditional compilation) and the release build those things are gone and it is very optimized/small.
+
+#### Entity / Component 
+
+I used the [entity](https://github.com/markknol/flambe-guide/wiki/Entities)/[component](https://github.com/markknol/flambe-guide/wiki/Components) from Flambe, I removed the  onAdded function, because I didn't use it. I've a useful macro that consumes the metadata `@:component` which can be applied on fields, e.g. `@:component var display:DisplayComponent;`. This does automagically injects `if (display != null) { display = owner.get(DisplayComponent); Assert(display != null, "Game.display cannot be null"); }` in the `onStart()` method. This avoids boilerplate code and is very usable in all game projects that use this entity/component setup, because its readable on which component it depends. In release builds, Assert's are entirely removed. One can also use `@:component(parents)` which does `owner.getFromParents()` or `@:component(children)` or `@:component(optional)` to skip the assert. This is a slight overhead maybe but I think was worth keeping.
 
 #### Conclusion
 
