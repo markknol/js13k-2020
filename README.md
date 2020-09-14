@@ -75,7 +75,7 @@ I created [build tool](src/BuildTool.hx) (a macro that runs after compilation is
 
 I added the [no-spoon](https://github.com/back2dos/no-spoon/) library (also macro) to replace `Std.string`; this is Haxe's build-in to-string function that is consistent over all Haxe targets, but adds quite some boilerplate code. I don't need this, so I replaced it with something that just returns itself.
 
-This is the code:
+This is the final code:
 ![js13k code](https://user-images.githubusercontent.com/576184/93130550-fc056b00-f6d2-11ea-9efd-fbc300e75fb6.png)
 
 * The renderer/entity/component system is ~7kb minified, ~3kb zipped.
