@@ -20,7 +20,7 @@ This is the first time I joined the js13k gamejam. The idea is to create a game 
 
 #### Getting started
 
-<img src="https://haxe.org/img/branding/haxe-logo-vertical-white-background.png" width="100" align="left" />
+<a href="https://haxe.org"><img src="https://haxe.org/img/branding/haxe-logo-vertical-white-background.png" width="100" align="left" /></a>
 
 To prove to myself it is perfectly possible to use [Haxe](https://haxe.org) for this, I started to create a small engine in Haxe. I called the project hx13k initially. Haxe is a programming languages that compiles to [many languages](https://haxe.org/documentation/introduction/compiler-targets.html), including JavaScript / ES6. 
 As main part of my daily job I am game developer and make HTML5 adver games, so I liked the idea of this jam.
