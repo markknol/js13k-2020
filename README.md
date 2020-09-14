@@ -40,7 +40,8 @@ I created another (hidden) canvas pure for interaction. The mainloop iterates ea
 When it finds an DisplayComponent in the hierarchy it will call `display.draw(ctx)` (ctx = 2d context of visual canvas) in the odd frames, but calls a `display.drawInteraction(ctx)` (ctx = 2d context of interaction canvas) in the even frames.
 Maybe it could run in the same frame and render the game at 60fps, but I thought to save the planet a bit.
 
-When a display component is created, it will get stored in a static map, by its interaction color. If user taps, I use that position, check the color in the interaction canvas. I look this up in the static map and then I know which display object is tapped. Quick and dirty :)
+When a display component is created, it will get stored in a static map, by a random assigned interaction color. If user taps, I use that position, check the color on the tapped position in the interaction canvas. I look this colot up in the static map and then I know which display object is tapped. Quick and dirty :)
+
 #### Procedural lines
 I had a problem at the beginning of this project, I actually didn't know what game to create. 
 At this point I could draw anything I wanted on screen, but yeah, go gotta have an idea eh? 
